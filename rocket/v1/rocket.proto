@@ -4,7 +4,9 @@ package rocket;
 
 // Rocket represents the model of our rocket
 message Rocket {
-    string type = 1;
+    string id = 1;
+    string name = 2;
+    string type = 3;
 }
 
 // RocketService - defines what endpoints we'll be exposing
@@ -38,7 +40,7 @@ message AddRocketResponse {
 
 // -- Add Rocket Handler -- 
 message DeleteRocketRequest {
-    int64 id = 1;
+    Rocket rocket = 1;
 }
 
 message DeleteRocketResponse {
