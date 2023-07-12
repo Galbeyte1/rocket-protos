@@ -1,5 +1,5 @@
 syntax = "proto3";
-
+option go_package = "rocket/v1";
 package rocket;
 
 // Rocket represents the model of our rocket
