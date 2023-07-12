@@ -69,6 +69,7 @@ type RocketServiceServer interface {
 	GetRocket(context.Context, *GetRocketRequest) (*GetRocketResponse, error)
 	AddRocket(context.Context, *AddRocketRequest) (*AddRocketResponse, error)
 	DeleteRocket(context.Context, *DeleteRocketRequest) (*DeleteRocketResponse, error)
+	mustEmbedUnimplementedRocketServiceServer()
 }
 
 // UnimplementedRocketServiceServer must be embedded to have forward compatible implementations.
@@ -84,10 +85,14 @@ func (UnimplementedRocketServiceServer) AddRocket(context.Context, *AddRocketReq
 func (UnimplementedRocketServiceServer) DeleteRocket(context.Context, *DeleteRocketRequest) (*DeleteRocketResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteRocket not implemented")
 }
+func (UnimplementedRocketServiceServer) mustEmbedUnimplementedRocketServiceServer() {}
 
 // UnsafeRocketServiceServer may be embedded to opt out of forward compatibility for this service.
 // Use of this interface is not recommended, as added methods to RocketServiceServer will
 // result in compilation errors.
+type UnsafeRocketServiceServer interface {
+	mustEmbedUnimplementedRocketServiceServer()
+}
 
 func RegisterRocketServiceServer(s grpc.ServiceRegistrar, srv RocketServiceServer) {
 	s.RegisterService(&RocketService_ServiceDesc, srv)
